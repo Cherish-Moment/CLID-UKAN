@@ -1,0 +1,47 @@
+run:
+  mode: 'train'
+  device: 'gpu'
+transforms: none
+dataset:
+  class_name: "BUSIDataset"
+  input_size: 224
+  scale: 2.5
+  data_dir: "../../data/BUSI"
+  dataset_dir: "../datasets/BUSI"
+  number_classes: 2
+data_loader:
+  train:
+    batch_size: 16
+    shuffle: false
+    num_workers: 0
+    pin_memory: true
+  validation:
+    batch_size: 16
+    shuffle: false
+    num_workers: 0
+    pin_memory: true
+  test:
+    batch_size: 16
+    shuffle: false
+    num_workers: 0
+    pin_memory: false
+training:
+  optimizer:
+    name: 'Adam'
+    params:
+      lr: 0.0001
+  criterion:
+    name: "DiceLoss"
+    params: {}
+  scheduler:
+    factor: 0.5
+    patience: 10
+  epochs: 50
+model:
+  save_dir: 'path to your save_dir'
+  load_weights: false
+  name: 'CLID-UKAN'
+  params:
+    in_ch: 3
+    out_ch: 2
+# preprocess:
